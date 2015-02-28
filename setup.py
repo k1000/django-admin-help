@@ -2,24 +2,17 @@
 
 from setuptools import setup, find_packages
 
-tests_require = [
-    'django',
-    # also requires the disqus fork of haystack
-]
-
 setup(
-    name='django-ratings',
-    version=".".join(map(str, __import__('djangoratings').__version__)),
-    author='David Cramer',
-    author_email='dcramer@gmail.com',
-    description='Generic Ratings in Django',
-    url='http://github.com/dcramer/django-ratings',
+    name='django-admin-help',
+    version="0.1",
+    author='Kamil Selwa',
+    author_email='selwak@gmail.com',
+    description='Interactive help for django admin',
+    url='https://github.com/k1000/django-admin-help',
     install_requires=[
         'django',
+        'django_admin_bootstrapped',
     ],
-    tests_require=tests_require,
-    extras_require={'test': tests_require},
-    test_suite='djangoratings.runtests.runtests',
     packages=find_packages(),
     include_package_data=True,
     classifiers=[
