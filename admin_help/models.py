@@ -26,8 +26,9 @@ class Step(models.Model):
         max_length=150,
         blank=True, null=True)
     position = models.CharField(
+        default="bottom",
         choices=zip(POSITIONS, POSITIONS), max_length=25)
-    intro = models.TextField()
+    intro = models.TextField("description")
 
     class Meta:
         ordering = ('order', )
