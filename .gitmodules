@@ -1,0 +1,3 @@
+[submodule "admin_help/static/intro.js"]
+	path = admin_help/static/intro.js
+	url = https://github.com/usablica/intro.js
