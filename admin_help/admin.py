@@ -16,33 +16,31 @@ class HelpAdminMixin(admin.ModelAdmin):
             'all': ["/static/intro.js/introjs.css"]
         }
 
-    def get_steps(self):
-        content_type = ContentType.objects.get_for_model(self.model)
+    def get_steps(self, path):
+        #import ipdb; ipdb.set_trace()
         try:
-            help_page = Page.objects.get(content_type=content_type)
-        except:
+            help_page = Page.objects.get(path=path)
+        except Page.DoesNotExist:
             # there is still no help for this page
             pass
         else:
             return help_page.step_set.all()
 
-    def render_steps_json(self):
-        queryset = self.get_steps()
-        if queryset:
-            steps = []
-            for step in queryset:
-                steps.append(dict(
-                    element=step.element,
-                    intro=step.intro,
-                    position=step.position
-                ))
-            return json.dumps(steps)
-        else:
-            return "[]"
+    def render_steps_json(self, steps):
+        steps_dict = []
+        for step in steps:
+            steps_dict.append(dict(
+                element=step.element,
+                intro=step.desc,
+                position=step.position
+            ))
+        return json.dumps(steps_dict)
 
     def add_view(self, request, form_url='', extra_context=None):
         extra_context = extra_context or {}
-        extra_context['steps'] = self.render_steps_json()
+        steps = self.get_steps(request.get_full_path())
+        if steps:
+            extra_context['steps'] = self.render_steps_json(steps)
         return self.changeform_view(request, None, form_url, extra_context)
 
 
@@ -52,7 +50,7 @@ class StepInline(admin.StackedInline, SortableInline):
 
 
 class HelpPageAdmin(admin.ModelAdmin):
-    list_display = ["content_type", "completed"]
+    list_display = ["path", "completed"]
 
     inlines = [StepInline]
 
