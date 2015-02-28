@@ -4,16 +4,21 @@ from django.core import urlresolvers
 
 
 class Page(models.Model):
-    content_type = models.ForeignKey(ContentType, unique=True)
+    path = models.CharField(
+        max_length= 255,
+        help_text="full path ex '/admin/admin_help/page/add/'")
     description = models.TextField(blank=True, null=True)
     completed = models.BooleanField()
-
-    def get_admin_add(self):
+    
+    def get_admin_page(self):
         return urlresolvers.reverse(
-            "admin:%s_%s_add" % (self.content_type.app_label, self.content_type.model))
+            "admin:%s_%s_%s" % (
+                self.content_type.app_label,
+                self.content_type.model,
+                self.page_type))
 
     def __unicode__(self):
-        return str(self.content_type)
+        return str(self.path)
 
 
 POSITIONS = ("bottom", "top", "left", "right")
@@ -28,7 +33,7 @@ class Step(models.Model):
     position = models.CharField(
         default="bottom",
         choices=zip(POSITIONS, POSITIONS), max_length=25)
-    intro = models.TextField("description")
+    desc = models.TextField("description")
 
     class Meta:
         ordering = ('order', )
