@@ -2,7 +2,8 @@
 django-admin-help
 #################
 
-Module which allowing interactive help for django admin.
+Interactive help for django admin.
+I allows "stap by step" guidence and direct reference.
 It uses `intro.js <https://github.com/usablica/intro.js>` for presentation layer 
 
 ============
@@ -11,7 +12,11 @@ Installation
 
 You will need to add ``admin-help`` to ``INSTALLED_APPS`` your settings.py
 
+Run ``python manage.py collectstatic``
+
 Finally, run ``python manage.py syncdb`` in your application's directory to create the tables.
+
+Optionally can be installed ``django_admin_bootstrapped`` for sotable admin inlines
 
 ================
 Setup your admin
