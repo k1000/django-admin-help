@@ -11,27 +11,34 @@ class HelpAdminMixin(admin.ModelAdmin):
     change_form_template = "admin/admin_help/change_form.html"
 
     class Media:
-        js = ["/static/admin_help/js/intro.js"]
+        js = ["/static/intro.js/intro.js"]
         css = {
-            'all': ["/static/admin_help/css/introjs.css"]
+            'all': ["/static/intro.js/introjs.css"]
         }
 
     def get_steps(self):
         content_type = ContentType.objects.get_for_model(self.model)
-        help_page = Page.objects.get(content_type=content_type)
-        steps = help_page.step_set.all()
-        return steps
+        try:
+            help_page = Page.objects.get(content_type=content_type)
+        except:
+            # there is still no help for this page
+            pass
+        else:
+            return help_page.step_set.all()
 
     def render_steps_json(self):
         queryset = self.get_steps()
-        steps = []
-        for step in queryset:
-            steps.append(dict(
-                element=step.element,
-                intro=step.intro,
-                position=step.position
-            ))
-        return json.dumps(steps)
+        if queryset:
+            steps = []
+            for step in queryset:
+                steps.append(dict(
+                    element=step.element,
+                    intro=step.intro,
+                    position=step.position
+                ))
+            return json.dumps(steps)
+        else:
+            return "[]"
 
     def add_view(self, request, form_url='', extra_context=None):
         extra_context = extra_context or {}
