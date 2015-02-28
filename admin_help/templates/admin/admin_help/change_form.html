@@ -5,14 +5,22 @@
 {{ super }}
 <script type="text/javascript">
     var steps = {{ steps|safe }};
-    function init_steps(){
-        var intro = introJs();
-        intro.setOptions(steps);
-        intro.start();
-    };
+    var intro = null;
+    function set_tips(steps){
+    	for (var i = 0; i < steps.length; i++) {
+        	var step = steps[i];
+        	var l = $('<a class="pull_right"><span class="glyphicon glyphicon-question-sign glyphicon-align-right" aria-hidden="true" span></span></a>').click( function(){ intro.goToStep(i).start() })
+        	$(step.element).append(l)
+        };
+    }
 
     (function($) {
-        init_steps();
+    	intro = introJs();
+        intro.setOptions({steps: steps});
+    	var l = $('<a class="pull_right"><span class="glyphicon glyphicon-question-sign glyphicon-align-right" aria-hidden="true" span></span></a>').click( function(){ intro.start(); })
+        l.insertAfter( ".navbar-brand" );
+        set_tips(steps);
+
     })(jQuery);
 </script>
 {% endblock %}
