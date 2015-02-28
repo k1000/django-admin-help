@@ -1,0 +1,18 @@
+{% extends 'admin/change_form.html' %}
+
+
+{% block after_related_objects %}
+{{ super }}
+<script type="text/javascript">
+    var steps = {{ steps|safe }};
+    function init_steps(){
+        var intro = introJs();
+        intro.setOptions(steps);
+        intro.start();
+    };
+
+    (function($) {
+        init_steps();
+    })(jQuery);
+</script>
+{% endblock %}
