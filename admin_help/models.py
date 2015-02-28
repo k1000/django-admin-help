@@ -9,13 +9,6 @@ class Page(models.Model):
         help_text="full path ex '/admin/admin_help/page/add/'")
     description = models.TextField(blank=True, null=True)
     completed = models.BooleanField()
-    
-    def get_admin_page(self):
-        return urlresolvers.reverse(
-            "admin:%s_%s_%s" % (
-                self.content_type.app_label,
-                self.content_type.model,
-                self.page_type))
 
     def __unicode__(self):
         return str(self.path)

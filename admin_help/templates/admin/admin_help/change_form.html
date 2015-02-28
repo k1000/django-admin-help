@@ -6,18 +6,23 @@
 <script type="text/javascript">
     var steps = {{ steps|safe }};
     var intro = null;
+    var h_btn = '<a class="btn pull-right"><span class="glyphicon glyphicon-question-sign glyphicon-align-right" aria-hidden="true" span></span></a>';
     function set_tips(steps){
     	for (var i = 0; i < steps.length; i++) {
         	var step = steps[i];
-        	var l = $('<a class="pull_right"><span class="glyphicon glyphicon-question-sign glyphicon-align-right" aria-hidden="true" span></span></a>').click( function(){ intro.goToStep(i).start() })
-        	$(step.element).append(l)
+        	var btn = $(h_btn)
+        		.data('i', i)
+        		.click( function(){
+        			var i = $(this).data("i") + 1;
+        			intro.goToStep(i).start() });
+        	$(step.element).append(btn);
         };
     }
 
     (function($) {
     	intro = introJs();
         intro.setOptions({steps: steps});
-    	var l = $('<a class="pull_right"><span class="glyphicon glyphicon-question-sign glyphicon-align-right" aria-hidden="true" span></span></a>').click( function(){ intro.start(); })
+    	var l = $(h_btn).click( function(){ intro.start(); })
         l.insertAfter( ".navbar-brand" );
         set_tips(steps);
 
