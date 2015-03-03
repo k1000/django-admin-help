@@ -10,6 +10,8 @@ It uses `intro.js <https://github.com/usablica/intro.js>` for presentation layer
 Installation
 ============
 
+Run ``pip install -e git+https://github.com/k1000/django-admin-help.git#egg=admin_help``
+
 You will need to add ``admin-help`` to ``INSTALLED_APPS`` your settings.py
 
 Run ``python manage.py collectstatic``
