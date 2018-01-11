@@ -8,10 +8,10 @@ from models import Step, Page
 
 
 class HelpAdminMixin(admin.ModelAdmin):
-    change_form_template = "admin/admin_help/change_form.html"
+    #change_form_template = "admin/admin_help/change_form.html"
 
     class Media:
-        js = ["/static/intro.js/intro.js"]
+        js = ["/static/intro.js/intro.js", "static/admin-help.js"]
         css = {
             'all': ["/static/intro.js/introjs.css"]
         }
