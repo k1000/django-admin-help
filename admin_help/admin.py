@@ -37,6 +37,7 @@ class HelpAdminMixin(admin.ModelAdmin):
         return json.dumps(steps_dict)
 
     def add_view(self, request, form_url='', extra_context=None):
+        # adds steps to the context
         extra_context = extra_context or {}
         steps = self.get_steps(request.get_full_path())
         if steps:
