@@ -18,7 +18,7 @@ Run ``python manage.py collectstatic``
 
 Finally, run ``python manage.py syncdb`` in your application's directory to create the tables.
 
-Optionally can be installed ``django_admin_bootstrapped`` for sotable admin inlines
+Optionally can be installed ``django_admin_bootstrapped`` for sortable admin inlines
 
 ================
 Setup your admin
