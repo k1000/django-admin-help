@@ -4,7 +4,7 @@ from django.contrib.contenttypes.models import ContentType
 
 from django_admin_bootstrapped.admin.models import SortableInline
 
-from models import Step, Page
+from .models import Step, Page
 
 
 class HelpAdminMixin(admin.ModelAdmin):
