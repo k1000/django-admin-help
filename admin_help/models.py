@@ -18,7 +18,7 @@ POSITIONS = ("bottom", "top", "left", "right")
 
 
 class Step(models.Model):
-    page = models.ForeignKey(Page)
+    page = models.ForeignKey(Page, on_delete=models.DO_NOTHING)
     order = models.PositiveSmallIntegerField()
     element = models.CharField(
         max_length=150,
