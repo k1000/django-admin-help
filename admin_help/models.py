@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
-from django.core import urlresolvers
+#from django.core import urlresolvers
 
 
 class Page(models.Model):
